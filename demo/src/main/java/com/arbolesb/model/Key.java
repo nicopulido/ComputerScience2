@@ -1,34 +1,39 @@
 package com.arbolesb.model;
 
-
 public class Key {
 
+    Loaf leftPointer;
+    Loaf rightPointer;
     int value;
-    Key next;
-    Key previous;
 
     public Key(int value) {
         this.value = value;
+        this.leftPointer = null;
+        this.rightPointer = null;
+    }
+    @Override
+    public String toString() {
+        return Integer.toString(this.value);
     }
 
-    public void setNext(Key next) {
-        this.next = next;
+    public Loaf getLeft() {
+        return leftPointer;
     }
 
-    public void setPrevious(Key previous) {
-        this.previous = previous;
+    public Loaf getRight() {
+        return rightPointer;
     }
 
     public int getValue() {
-        return value;
+        return value;   
     }
 
-    public Key next() {
-        return next;
+    public void setLeft(Loaf leftPointer) {
+        this.leftPointer = leftPointer;
     }
-
-    public Key previous() {
-        return previous;
+    
+    public void setRight(Loaf rightPointer) {
+        this.rightPointer = rightPointer;
     }
 
 }
