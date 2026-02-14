@@ -47,10 +47,17 @@ public class Loaf {
         }
     }
 
+    public boolean isFull() {
+
+        if(this.numKeys < this.maxKey) {
+            return true;
+        }
+        else { return false;}
+    }
     public void insertion(int value) {
 
         Key newKey = new Key(value);
-        
+ 
         if(this.numKeys < this.maxKey) {
             this.keys[numKeys] = newKey;
             this.numKeys++;
