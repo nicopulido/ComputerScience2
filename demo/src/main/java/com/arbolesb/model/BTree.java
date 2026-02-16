@@ -12,11 +12,31 @@ public class BTree {
 
     public void insertion(int value) {
 
-        if(this.root.isFull() == false) {
-            this.root.insertion(value);
+        if (root == null) {
+            root = new Loaf(maxChild);
+            root.insertion(value);
         }
         else {
-            // TODO: division function, make it appart
+            Loaf current = root;
+            while (current.numChildren > 0) {
+                int i = 0;
+                while (i < current.numKeys && value > current.keys[i].getValue()) {
+                    i++;
+                }
+                current = current.children[i];
+            }
+            current.insertion(value);
+            if (root.parent != null) {
+                root = root.parent;
+            }
+        }
+
+
+        
+    }
+    public void print() {
+        if (root != null) {
+            root.print(0);
         }
     }
 

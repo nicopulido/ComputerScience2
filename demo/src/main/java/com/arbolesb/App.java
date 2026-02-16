@@ -1,27 +1,25 @@
 package com.arbolesb;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import com.arbolesb.model.BTree;
 
-import com.arbolesb.model.Loaf;
-
-@ApplicationPath("app")
-public class App extends Application {
+public class App {
     
     public static void main(String[] args) {
-        Loaf loaf = new Loaf(4);
+        BTree bTree = new BTree(4);
         System.out.println("primera extensión");
-        loaf.insertion(23);
-        loaf.print();
+        bTree.insertion(23);
+        bTree.print();
         System.out.println("segunda extensión");
-        loaf.insertion(45);
-        loaf.print();
+        bTree.insertion(45);
+        bTree.print();
         System.out.println("tercera extensión");
-        loaf.insertion(5);
+        bTree.insertion(5);
+        bTree.print();
         System.out.println("cuarta extensión");
-        loaf.insertion(13);
-        loaf.insertion(40);
-        loaf.print();
+        bTree.insertion(13);
+        bTree.print();
+        bTree.insertion(40);
+        bTree.print();
     }
 
 }
