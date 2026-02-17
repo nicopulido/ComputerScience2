@@ -41,6 +41,22 @@ public class BTree {
     }
 
 
+    public void elimination(int value) {
+        if (root != null) {
+            root.elimination(value);
+            if (root.numKeys == 0) {
+                if (root.numChildren > 0) {
+                    root = root.children[0];
+                    root.parent = null;
+                }
+                else {
+                    root = null;
+                    System.out.println("El arbol esta vacio");
+                }
+            }
+        }
+    }
+
 
     
 }

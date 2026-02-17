@@ -20,6 +20,14 @@ public class App {
         bTree.print();
         bTree.insertion(40);
         bTree.print();
+        bTree.insertion(50);
+        bTree.print();
+        bTree.insertion(60);
+        bTree.print();
+        bTree.elimination(45);
+        bTree.print();
+        bTree.elimination(23);
+        bTree.print();
     }
 
 }
