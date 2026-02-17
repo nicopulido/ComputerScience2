@@ -329,11 +329,15 @@ public class Loaf {
     }
    
 
-    public void print(int level) {
+    public String print(int level) {
         
-        System.out.println("Level " + level + Arrays.toString(Arrays.copyOf(keys, numKeys)));
+        String str = " ";
+        str += "Level " + level + Arrays.toString(Arrays.copyOf(keys, numKeys));
         for (int i = 0; i < numChildren; i++) {
-            if (children[i] != null) children[i].print(level + 1);
+            if (children[i] != null) {
+                
+                str += children[i].print(level + 1) + "\n";}
         }
+        return str;
     }
 }

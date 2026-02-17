@@ -34,9 +34,12 @@ public class BTree {
 
         
     }
-    public void print() {
+    public String print() {
         if (root != null) {
-            root.print(0);
+            return root.print(0);
+        }
+        else {
+            return " ";
         }
     }
 

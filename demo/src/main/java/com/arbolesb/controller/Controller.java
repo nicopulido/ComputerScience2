@@ -4,7 +4,7 @@ import com.arbolesb.model.BTree;
 
 public class Controller {
     
-    private BTree btree;
+    public BTree btree;
 
     public Controller(int maxChild) {
         this.btree = new BTree(maxChild);
@@ -17,8 +17,8 @@ public class Controller {
     public void elimination(int value) {
         this.btree.elimination(value);
     }
-
-    public void print() {
-        this.btree.print();
+    // TODO: Frontend devs, please change this function
+    public String print() {
+        return this.btree.print();
     }
 }
