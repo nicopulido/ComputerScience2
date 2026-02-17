@@ -1,7 +1,5 @@
 package com.arbolesb.model;
 
-import java.util.Arrays;
-
 public class Loaf {
 
     int maxChild;
@@ -330,13 +328,28 @@ public class Loaf {
    
 
     public String print(int level) {
-        
-        String str = " ";
-        str += "Level " + level + Arrays.toString(Arrays.copyOf(keys, numKeys));
+        return printHelper(level, "", true);
+    }
+    
+    private String printHelper(int level, String prefix, boolean isLast) {
+        String str = "";
+        String tipo = (numChildren == 0) ? "  HOJA" : "  NODO";
+        String nodeContent = "[";
+        for (int i = 0; i < numKeys; i++) {
+            nodeContent += keys[i].getValue();
+            if (i < numKeys - 1) nodeContent += ", ";
+        }
+        nodeContent += "]";
+        if (level == 0) {
+            str += "\n┌─ ROOT: " + nodeContent + tipo + "\n";
+        } else {
+            str += prefix + (isLast ? "└─ " : "├─ ") + nodeContent + tipo + "\n";
+        }
         for (int i = 0; i < numChildren; i++) {
             if (children[i] != null) {
-                
-                str += children[i].print(level + 1) + "\n";}
+                String newPrefix = prefix + (isLast ? "   " : "│  ");
+                str += children[i].printHelper(level + 1, newPrefix, i == numChildren - 1);
+            }
         }
         return str;
     }
