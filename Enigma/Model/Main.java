@@ -1,23 +1,19 @@
-package Enigma.Model;
+public class main {
+    public static void main(String[] args){
+        int[] posicionesIniciales = {0, 0, 0};
+        Enigma enigma = new Enigma(posicionesIniciales);
+        
+        enigma.setReflector("abcdefghijklmnopqrstuvwxyz", "zyxwvutsrqponmlkjihgfedcba");
+        
+        enigma.setCableado("abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz");
 
-public class Main {
+        String mensaje = "clave secreta xd";
+        
+        enigma.printMensajeEncriptado(mensaje);
 
-    public static void main(String[] args) {
-        Enigma maquina = new Enigma();
-        // Clave AAA Rotones I,II,III
-        maquina.rotones[0] = maquina.setRoton('a', "I");
-        maquina.rotones[1] = maquina.setRoton('a', "II");
-        maquina.rotones[2] = maquina.setRoton('a', "III");
-        // Cableado
-        String entradaCableado = "abcdefghijklmnopqrstuvwxyz";
-        String salidaCableado = "zyxwvutsrqponmlkjihgfedcba";
-        maquina.setCableado(entradaCableado, salidaCableado);
-        //Reflector
-        String entradaReflector = "abcdefghijklmnopqrstuvwxyz";
-        String salidaReflector = "yruhqsldpxngokmiebfzcwvjat";
-        maquina.setReflector(entradaReflector, salidaReflector);
-
-        System.out.println(maquina.cipher('a'));
+        enigma.resetRotores();
+        
+        String mensajeEncriptado = "dsbet dppyjsj kc"; 
+        enigma.printMensajeEncriptado(mensajeEncriptado);
     }
-    
 }

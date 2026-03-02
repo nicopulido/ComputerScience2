@@ -1,54 +1,70 @@
-package Enigma.Model;
-
 import java.util.HashMap;
 
 public class Enigma {
-    public Roton[] rotones;
+    public Rotor[] rotores;
     public Reflector reflector;
     public Reflector cableado;
-    private HashMap<String, String> alfabetos = new HashMap<String, String>();
+    public int[] arrayPosicionesIniciales = new int[3]; 
 
-
-    public Enigma() {
-        this.rotones = new Roton[3];
-        this.alfabetos.put("I", "ekmflgdqvzntowyhxuspaibrcj");
-        this.alfabetos.put("II", "ajdksiruxblhwtmcqgznpyfvoe");
-        this.alfabetos.put("III", "bdfhjlcprtxvznyeiwgakmusqo");
-        this.alfabetos.put("IV", "ESOVPZJAYQUIRHXLNFTGKDCMWB");
-        this.alfabetos.put("V", "VZBRGITYUPSDNHLXAWMJQOFECK");
-    }
-
-    public Roton setRoton(char LetraInicial, String alfabeto) {
-        alfabeto = this.alfabetos.get(alfabeto);
-        return new Roton(LetraInicial, alfabeto);
-    }
-
-    public void setReflector(String entradas, String salidas) {
-        this.reflector = new Reflector(entradas, salidas);
-    }
-
-    public void setCableado(String entradas, String salidas) {
-        this.cableado = new Reflector(entradas, salidas);
-    }
-
-    public char cipher(char letra) {
-        System.out.println(letra);
-        char letraCableado = this.cableado.getChar(letra);
-        System.out.println("cableado: " + letraCableado);
-        char letraRotones = letraCableado;
-        for (int i = 0; i < rotones.length; i++) {
-            letraRotones = rotones[i].getChar();
-            System.out.println("roton " + Integer.toString(i) + " : " + letraCableado);
+    public Enigma(int[] posicionesIniciales){
+        this.rotores = new Rotor[3];
+        rotores[0] = new Rotor("abcdefghijklmnopqrstuvwxyz", posicionesIniciales[0]);
+        rotores[1] = new Rotor(new String(rotores[0].alfabetoEncriptado), posicionesIniciales[1]);
+        rotores[2] = new Rotor(new String(rotores[1].alfabetoEncriptado), posicionesIniciales[2]);
+        
+        for (int i = 0; i < 3; i++) {
+            this.arrayPosicionesIniciales[i] = posicionesIniciales[i];
         }
-        char letraReflector = this.reflector.getChar(letraRotones);
-        System.out.println("reflector: " + letraReflector);
-        letraRotones = letraReflector;
-        for (int i = rotones.length - 1; i >= 0; i--) {
-            letraRotones = rotones[i].getChar();
-            System.out.println("roton " + Integer.toString(i) + " : " + letraCableado);
+    }
+
+    public void setReflector(String entrada, String salida){
+        this.reflector = new Reflector(entrada, salida);
+    }
+
+    public void setCableado(String entrada, String salida){
+        this.cableado = new Reflector(entrada, salida);
+    }
+
+    private void rotarRotores(){
+        boolean ciclo = rotores[0].rotar();
+        if(ciclo){
+            ciclo = rotores[1].rotar();
+            if(ciclo){
+                rotores[2].rotar();
+            }
         }
-        letraCableado = this.cableado.getChar(letraRotones);
-        System.out.println("cableado: " + letraCableado);
-        return letraCableado;
+    }
+
+    public void resetRotores() {
+        for (int i = 0; i < 3; i++) {
+            rotores[i].posicionActual = arrayPosicionesIniciales[i];
+        }
+    }
+
+    public char encriptar(char letra){    
+        if (letra == ' ') {
+            return ' '; 
+        }
+        rotarRotores();
+        letra = Character.toLowerCase(letra);
+        letra = cableado.getChar(letra);
+        for (int i = 0; i < rotores.length; i++) {
+            letra = rotores[i].encriptarAdelante(letra);
+        }
+        letra = reflector.getChar(letra);
+        for (int i = rotores.length - 1; i >= 0; i--) {
+            letra = rotores[i].encriptarAtras(letra);
+        }
+        letra = cableado.getChar(letra);
+        return letra;
+    }
+
+    public void printMensajeEncriptado(String mensaje){
+        String mensajeEncriptado = "";
+        for (int i = 0; i < mensaje.length(); i++) {
+            mensajeEncriptado += encriptar(mensaje.charAt(i));
+        }
+        System.out.println("Mensaje original: " + mensaje);
+        System.out.println("Mensaje encriptado: " + mensajeEncriptado);
     }
 }
