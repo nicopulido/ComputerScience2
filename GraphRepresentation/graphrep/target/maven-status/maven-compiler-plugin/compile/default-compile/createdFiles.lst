@@ -1,0 +1,5 @@
+com\graph\model\Graph.class
+com\graph\model\Edge.class
+com\graph\model\AdjacencyM.class
+com\graph\model\IncidenceM.class
+com\graph\App.class
