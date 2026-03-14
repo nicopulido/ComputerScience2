@@ -34,8 +34,16 @@ public class Graph<T> {
 
         Vertex<T> vertex1 = this.getVertex(vertexValue1);
         Vertex<T> vertex2 = this.getVertex(vertexValue2);
-        vertex1.addEdge(vertex2);
-        vertex2.addEdge(vertex1);
+        
+        // Si es un self-loop (arista a sí mismo), agregar solo una vez
+        if (vertex1 == vertex2) {
+            vertex1.addEdge(vertex2);
+        } else {
+            // Arista bidireccional entre vértices diferentes
+            vertex1.addEdge(vertex2);
+            vertex2.addEdge(vertex1);
+        }
+        
         Edge<T> edge = new Edge<>(vertex1, vertex2);
         this.edges.add(edge);
     }
@@ -58,8 +66,15 @@ public class Graph<T> {
         for (Edge<T> edge : this.edges) {
             int vertex1Index = this.vertexs.indexOf(edge.getFirst());
             int vertex2Index = this.vertexs.indexOf(edge.getSecond());
-            matrix[vertex1Index][vertex2Index] = 1;
-            matrix[vertex2Index][vertex1Index] = 1;           
+            
+            // Si es un self-loop, solo marcar una vez
+            if (vertex1Index == vertex2Index) {
+                matrix[vertex1Index][vertex2Index] = 1;
+            } else {
+                // Arista bidireccional
+                matrix[vertex1Index][vertex2Index] = 1;
+                matrix[vertex2Index][vertex1Index] = 1;
+            }
         }
         return matrix;
     }
