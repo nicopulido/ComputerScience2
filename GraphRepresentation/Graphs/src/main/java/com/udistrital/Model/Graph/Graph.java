@@ -6,10 +6,10 @@ import com.udistrital.Model.Edge.Edge;
 import com.udistrital.Model.Vertex.IVertex;
 
 
-public abstract class Graph<T> {
+public abstract class Graph<T,U> {
 
-    public ArrayList<IVertex<T>> vertexs;
-    public ArrayList<Edge<T>> edges;
+    public ArrayList<IVertex<T,U>> vertexs;
+    public ArrayList<Edge<T,U>> edges;
 
 
     public Graph() {
@@ -17,21 +17,21 @@ public abstract class Graph<T> {
         this.edges = new ArrayList<>();
     }
 
-    public abstract void addEdge(T vertexValue1, T vertexValue2);
+    public abstract void addEdge(T vertexValue1, T vertexValue2, U edgeValue);
     public abstract void removeEdge(T vertexValue1, T vertexValue2);
-    public abstract ArrayList<Edge<T>> getEdges(T vertex);
+    public abstract ArrayList<Edge<T,U>> getEdges(T vertex);
     public abstract void addVertex(T value);
     public abstract void removeVertex(T value);
-    public abstract IVertex<T> getVertex(T value);
+    public abstract IVertex<T,U> getVertex(T value);
 
     public void listAdya() {
-        for (IVertex<T> vertex : this.vertexs) {
+        for (IVertex<T,U> vertex : this.vertexs) {
             System.out.println(vertex + "-> { " + vertex.getNeighbours() + " }");
         }
     }
 
     public void listInci() {
-        for (IVertex<T> vertex : this.vertexs) {
+        for (IVertex<T,U> vertex : this.vertexs) {
             System.out.println(vertex + "-> { " + vertex.getEdges() + " }");
         }
     }
@@ -39,7 +39,7 @@ public abstract class Graph<T> {
     public int[][] matrixAdya() {
         int[][] matrix = new int[this.vertexs.size()][this.vertexs.size()];
 
-        for (Edge<T> edge : this.edges) {
+        for (Edge<T,U> edge : this.edges) {
             int vertex1Index = this.vertexs.indexOf(edge.getVertexs()[0]);
             int vertex2Index = this.vertexs.indexOf(edge.getVertexs()[1]);
             matrix[vertex1Index][vertex2Index] = 1;
@@ -51,11 +51,11 @@ public abstract class Graph<T> {
     public int[][] matrixInci() {
         int[][] matrix = new int[this.vertexs.size()][this.edges.size()];
 
-        for (Edge<T> edge : this.edges) {
+        for (Edge<T,U> edge : this.edges) {
 
             int edgeIndex = this.edges.indexOf(edge);
 
-            for (IVertex<T> vertex : this.vertexs) {
+            for (IVertex<T,U> vertex : this.vertexs) {
 
                 int vertexIndex = this.vertexs.indexOf(vertex);
 

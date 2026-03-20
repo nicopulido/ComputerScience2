@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 import com.udistrital.Model.Edge.Edge;
 
-public abstract class IVertex<T> {
+public abstract class IVertex<T,U> {
 
     public T value;
 
-    public abstract void addEdge(Edge<T> edge);
-    public abstract void removeEdge(Edge<T> edge);
-    public abstract ArrayList<Edge<T>> getEdges();
-    public abstract ArrayList<IVertex<T>> getNeighbours();
+    public abstract void addEdge(Edge<T,U> edge);
+    public abstract void removeEdge(Edge<T,U> edge);
+    public abstract ArrayList<Edge<T, U>> getEdges();
+    public abstract ArrayList<IVertex<T,U>> getNeighbours();
 
     public T getValue() {
         return this.value;
@@ -27,7 +27,7 @@ public abstract class IVertex<T> {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        IVertex<?> other = (IVertex<?>) obj;
+        IVertex<?,?> other = (IVertex<?,?>) obj;
         return Objects.equals(this.value, other.value);
     }
 

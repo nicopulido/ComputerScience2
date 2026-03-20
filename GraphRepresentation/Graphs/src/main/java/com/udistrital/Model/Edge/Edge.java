@@ -1,20 +1,14 @@
 package com.udistrital.Model.Edge;
 
 import com.udistrital.Model.Vertex.IVertex;
+import com.udistrital.Model.Vertex.Vertex;
 
-public abstract class Edge<T> {
+public interface Edge<T,U> {
 
-public T value;
+public IVertex<T,U> get(IVertex<T,U> vertex);
+public IVertex<T,U>[] getVertexs();
+public U getValue();
+public void setValue(U value);
 
-public T getValue() {
-        return value;
-    }
-
-public void setValue(T value) {
-        this.value = value;
-    }
-
-public abstract IVertex<T> get(IVertex<T> vertex);
-public abstract IVertex<T>[] getVertexs();
 
 }
