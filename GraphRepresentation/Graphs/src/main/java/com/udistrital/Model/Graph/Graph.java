@@ -10,7 +10,8 @@ public abstract class Graph<T,U> {
 
     public ArrayList<IVertex<T,U>> vertexs;
     public ArrayList<Edge<T,U>> edges;
-
+    public U neutralValue;
+    public U infiniteValue;
 
     public Graph() {
         this.vertexs = new ArrayList<>();
@@ -23,6 +24,22 @@ public abstract class Graph<T,U> {
     public abstract void addVertex(T value);
     public abstract void removeVertex(T value);
     public abstract IVertex<T,U> getVertex(T value);
+
+    public void setNeutral(U value) {
+        this.neutralValue = value;
+    }
+
+    public U getNeutral() {
+        return this.neutralValue;
+    }
+
+    public void setInfinity(U inf) {
+        this.infiniteValue = inf;
+    }
+
+    public U getInfinity() {
+        return this.infiniteValue;
+    }
 
     public void listAdya() {
         for (IVertex<T,U> vertex : this.vertexs) {

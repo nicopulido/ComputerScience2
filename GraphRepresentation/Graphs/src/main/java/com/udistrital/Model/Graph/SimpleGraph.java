@@ -62,6 +62,25 @@ public class SimpleGraph<T> extends Graph<T,Void> {
     public void addEdge(T vertexValue1, T vertexValue2, Void edgeValue) {
         throw new UnsupportedOperationException("Simple graph do not support weight edges");
     }
+
+    @Override
+    public Void getNeutral() {
+        throw new UnsupportedOperationException("Simple graph do not support neutral values");
+    }
+    @Override
+    public void setNeutral(Void value) {
+        throw new UnsupportedOperationException("Simple graph do not support neutral values");
+    }
+
+    @Override
+    public Void getInfinity() {
+        throw new UnsupportedOperationException("Simple graph do not support neutral values");
+    }
+    @Override
+    public void setInfinity(Void value) {
+        throw new UnsupportedOperationException("Simple graph do not support neutral values");
+    }
+    
     
     
 }
