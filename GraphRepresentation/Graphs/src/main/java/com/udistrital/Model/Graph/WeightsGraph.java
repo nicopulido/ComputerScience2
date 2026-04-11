@@ -1,6 +1,8 @@
 package com.udistrital.Model.Graph;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.udistrital.Model.Edge.Edge;
 import com.udistrital.Model.Edge.WeightsEdge;
@@ -9,8 +11,10 @@ import com.udistrital.Model.Vertex.IVertex;
 
 public class WeightsGraph<T,U> extends Graph<T,U> {
 
-    public WeightsGraph() {
+    public WeightsGraph(U infinityValue, U neutral) {
         super();
+        this.setInfinity(infinityValue);
+        this.setNeutral(neutral);
     }
 
     @Override
@@ -18,10 +22,14 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         IVertex<T,U> vertex1 = this.getVertex(vertexValue1);
         IVertex<T, U> vertex2 = this.getVertex(vertexValue2);
         WeightsEdge<T,U> edge = new WeightsEdge<>(vertex1, vertex2, weightEdge);
-        this.edges.add(edge);
-        vertex1.addEdge(edge);
-        vertex2.addEdge(edge);
-  
+        if(vertex1 == vertex2) {
+            vertex1.addEdge(edge);
+        }
+        else {
+            vertex1.addEdge(edge);
+            vertex2.addEdge(edge);
+        }
+        this.edges.add(edge);  
     }
 
     @Override
@@ -57,7 +65,28 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         return vertexs.get(vertexs.indexOf(new Vertex<>(value)));
     }
 
+    @Override
+    public U[][] matrixAdya() {
+        U[][] matrix = this.createArray(this.vertexs.size(), this.neutralValue);
 
+        for (Edge<T,U> edge : this.edges) {
+            int vertex1Index = this.vertexs.indexOf(edge.getVertexs()[0]);
+            int vertex2Index = this.vertexs.indexOf(edge.getVertexs()[1]);
+            matrix[vertex1Index][vertex2Index] = edge.getValue();
+            matrix[vertex2Index][vertex1Index] = edge.getValue();
+        }
+        return matrix;
+    }
+
+    private static <U> U[][] createArray(int size, U defaultValue) 
+    {
+    @SuppressWarnings("unchecked")
+    U[][] array = (U[][]) Array.newInstance(defaultValue.getClass(), size, size);
+    for (U[] row : array) {
+        Arrays.fill(row, defaultValue);
+    }
+    return array;
+    }
     
     
 }

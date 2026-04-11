@@ -1,7 +1,6 @@
 package com.udistrital.Model.Edge;
 
 import com.udistrital.Model.Vertex.IVertex;
-import com.udistrital.Model.Vertex.Vertex;
 
 public interface Edge<T,U> {
 

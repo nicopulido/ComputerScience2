@@ -53,29 +53,14 @@ public abstract class Graph<T,U> {
         }
     }
 
-    public int[][] matrixAdya() {
-        int[][] matrix = new int[this.vertexs.size()][this.vertexs.size()];
-
-        for (Edge<T,U> edge : this.edges) {
-            int vertex1Index = this.vertexs.indexOf(edge.getVertexs()[0]);
-            int vertex2Index = this.vertexs.indexOf(edge.getVertexs()[1]);
-            matrix[vertex1Index][vertex2Index] = 1;
-            matrix[vertex2Index][vertex1Index] = 1;
-        }
-        return matrix;
-    }
+    public abstract U[][] matrixAdya();
 
     public int[][] matrixInci() {
         int[][] matrix = new int[this.vertexs.size()][this.edges.size()];
-
         for (Edge<T,U> edge : this.edges) {
-
             int edgeIndex = this.edges.indexOf(edge);
-
             for (IVertex<T,U> vertex : this.vertexs) {
-
                 int vertexIndex = this.vertexs.indexOf(vertex);
-
                 if(vertex == edge.getVertexs()[0] || vertex == edge.getVertexs()[1]) {
                     matrix[vertexIndex][edgeIndex] = 1;
                 }

@@ -7,7 +7,7 @@ import com.udistrital.Model.Edge.SimpleEdge;
 import com.udistrital.Model.Vertex.Vertex;
 import com.udistrital.Model.Vertex.IVertex;
 
-public class SimpleGraph<T> extends Graph<T,Void> {
+public class SimpleGraph<T> extends Graph<T,Integer> {
 
     public SimpleGraph() {
         super();
@@ -15,9 +15,9 @@ public class SimpleGraph<T> extends Graph<T,Void> {
 
 
     public void addEdge(T vertexValue1, T vertexValue2) {
-        IVertex<T,Void> vertex1 = this.getVertex(vertexValue1);
-        IVertex<T, Void> vertex2 = this.getVertex(vertexValue2);
-        Edge<T,Void> edge = new SimpleEdge<>(vertex1, vertex2);
+        IVertex<T,Integer> vertex1 = this.getVertex(vertexValue1);
+        IVertex<T, Integer> vertex2 = this.getVertex(vertexValue2);
+        Edge<T,Integer> edge = new SimpleEdge<>(vertex1, vertex2);
         this.edges.add(edge);
         vertex1.addEdge(edge);
         vertex2.addEdge(edge);
@@ -26,22 +26,22 @@ public class SimpleGraph<T> extends Graph<T,Void> {
 
     @Override
     public void removeEdge(T vertexValue1, T vertexValue2) {
-        IVertex<T,Void> vertex1 = this.getVertex(vertexValue1);
-        IVertex<T,Void> vertex2 = this.getVertex(vertexValue2);
-        Edge<T,Void> edge = new SimpleEdge<>(vertex1, vertex2);
+        IVertex<T,Integer> vertex1 = this.getVertex(vertexValue1);
+        IVertex<T,Integer> vertex2 = this.getVertex(vertexValue2);
+        Edge<T,Integer> edge = new SimpleEdge<>(vertex1, vertex2);
         this.edges.remove(edge);
         vertex1.addEdge(edge);
         vertex2.addEdge(edge);
     }
 
     @Override
-    public ArrayList<Edge<T,Void>> getEdges(T value) {
+    public ArrayList<Edge<T,Integer>> getEdges(T value) {
         return this.edges;
     }
 
     @Override
     public void addVertex(T value) {
-        IVertex<T,Void> vertex = new Vertex<>(value);
+        IVertex<T,Integer> vertex = new Vertex<>(value);
         this.vertexs.add(vertex);
     }
 
@@ -53,31 +53,42 @@ public class SimpleGraph<T> extends Graph<T,Void> {
     }
 
     @Override
-    public IVertex<T,Void> getVertex(T value) {
+    public IVertex<T,Integer> getVertex(T value) {
         return vertexs.get(vertexs.indexOf(new Vertex<>(value)));
     }
 
+    public Integer[][] matrixAdya() {
+        Integer[][] matrix = new Integer[this.vertexs.size()][this.vertexs.size()];
+
+        for (Edge<T,Integer> edge : this.edges) {
+            int vertex1Index = this.vertexs.indexOf(edge.getVertexs()[0]);
+            int vertex2Index = this.vertexs.indexOf(edge.getVertexs()[1]);
+            matrix[vertex1Index][vertex2Index] = 1;
+            matrix[vertex2Index][vertex1Index] = 1;
+        }
+        return matrix;
+    }
 
     @Override
-    public void addEdge(T vertexValue1, T vertexValue2, Void edgeValue) {
+    public void addEdge(T vertexValue1, T vertexValue2, Integer edgeValue) {
         throw new UnsupportedOperationException("Simple graph do not support weight edges");
     }
 
     @Override
-    public Void getNeutral() {
+    public Integer getNeutral() {
         throw new UnsupportedOperationException("Simple graph do not support neutral values");
     }
     @Override
-    public void setNeutral(Void value) {
+    public void setNeutral(Integer value) {
         throw new UnsupportedOperationException("Simple graph do not support neutral values");
     }
 
     @Override
-    public Void getInfinity() {
+    public Integer getInfinity() {
         throw new UnsupportedOperationException("Simple graph do not support neutral values");
     }
     @Override
-    public void setInfinity(Void value) {
+    public void setInfinity(Integer value) {
         throw new UnsupportedOperationException("Simple graph do not support neutral values");
     }
     
