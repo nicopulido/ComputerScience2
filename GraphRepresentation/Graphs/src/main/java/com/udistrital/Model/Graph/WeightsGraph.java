@@ -11,10 +11,21 @@ import com.udistrital.Model.Vertex.IVertex;
 
 public class WeightsGraph<T,U> extends Graph<T,U> {
 
+    private U infiniteValue;
+    private U neutralValue;
+
     public WeightsGraph(U infinityValue, U neutral) {
         super();
-        this.setInfinity(infinityValue);
-        this.setNeutral(neutral);
+        this.infiniteValue = infinityValue;
+        this.neutralValue = neutral;
+    }
+
+    public U getNeutral() {
+        return this.neutralValue;
+    }
+
+    public U getInfinity() {
+        return this.infiniteValue;
     }
 
     @Override

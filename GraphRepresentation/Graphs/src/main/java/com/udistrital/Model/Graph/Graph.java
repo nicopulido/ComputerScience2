@@ -25,22 +25,6 @@ public abstract class Graph<T,U> {
     public abstract void removeVertex(T value);
     public abstract IVertex<T,U> getVertex(T value);
 
-    public void setNeutral(U value) {
-        this.neutralValue = value;
-    }
-
-    public U getNeutral() {
-        return this.neutralValue;
-    }
-
-    public void setInfinity(U inf) {
-        this.infiniteValue = inf;
-    }
-
-    public U getInfinity() {
-        return this.infiniteValue;
-    }
-
     public void listAdya() {
         for (IVertex<T,U> vertex : this.vertexs) {
             System.out.println(vertex + "-> { " + vertex.getNeighbours() + " }");
