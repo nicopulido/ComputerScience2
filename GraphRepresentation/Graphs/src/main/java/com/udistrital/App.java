@@ -1,16 +1,8 @@
 package com.udistrital;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.udistrital.Model.Graph.*;
-import com.udistrital.Model.Edge.*;
-import com.udistrital.Model.Vertex.*;
+import com.udistrital.Model.Algorithms.*;;
 
 public class App 
 {
@@ -23,6 +15,7 @@ public class App
         grafo.listInci();*/
 
         WeightsGraph<Character, Integer> grafo2 = new WeightsGraph<>(9999, 0);
+        Dijkstra dijkstra = new Dijkstra();
 
         grafo2.addVertex('I');
         grafo2.addVertex('A'); 
@@ -46,13 +39,16 @@ public class App
         grafo2.addEdge('D', 'T', 18);
         grafo2.addEdge('F', 'T', 2);
 
+        System.out.println(dijkstra.shortestPath(grafo2, 'I', 'T'));
+
         Integer[][] matrix = grafo2.matrixAdya();
         for (int i = 0; i < matrix.length; i++) {
         for (int j = 0; j < matrix[i].length; j++) {
             System.out.print(matrix[i][j] + " ");
             
         }System.out.println();}
-        System.out.println(dijkstra(grafo2, 'I', 'T'));
+
+        
         
     }
   
@@ -71,70 +67,6 @@ public class App
         }
         return matrix;
     }
-
-public static <T, U extends Number> String dijkstra(WeightsGraph<T, U> graph, T value_origin, T value_destiny) {
-
-    IVertex<T, U> origen = graph.getVertex(value_origin);
-    IVertex<T, U> destiny = graph.getVertex(value_destiny);
-
-    if (origen == null || destiny == null) {
-        return "El origen o el destino no existen en el grafo.";
-    }
-    
-    Map<IVertex<T, U>, Double> distancias = new HashMap<>();
-    Map<IVertex<T, U>, IVertex<T, U>> predecesores = new HashMap<>();
-    Set<IVertex<T, U>> visitados = new HashSet<>();
-    distancias.put(origen, 0.0);
-    IVertex<T, U> actual = origen;
-
-    while (!actual.equals(destiny)) {
-
-        double minDistancia = Double.MAX_VALUE;
-
-        for (Map.Entry<IVertex<T, U>, Double> entry : distancias.entrySet()) {
-
-            if (!visitados.contains(entry.getKey()) && entry.getValue() < minDistancia) {
-                minDistancia = entry.getValue();
-                actual = entry.getKey();
-            }
-        }
-
-        if(actual != null) {
-            visitados.add(actual);
-        }
-
-        for (Edge<T, U> edge : actual.getEdges()) {
-            IVertex<T, U> vecino = edge.get(actual);
-
-            if(!visitados.contains(vecino)){
-
-            double pesoArista = edge.getValue().doubleValue();
-            double nuevaDistancia = distancias.get(actual) + pesoArista;
-            double distanciaActualVecino = distancias.getOrDefault(vecino, Double.MAX_VALUE);
-
-            if (nuevaDistancia < distanciaActualVecino) {
-                distancias.put(vecino, nuevaDistancia);
-                predecesores.put(vecino, actual);
-            }
-        }
-            }
-    }
-
-    if (!distancias.containsKey(destiny)) {
-        return "No existe un camino entre " + value_origin + " y " + value_destiny;
-    }
-
-    List<T> camino = new ArrayList<>();
-    IVertex<T, U> paso = destiny;
-
-    while (paso != null) {
-        camino.add(paso.getValue()); 
-        paso = predecesores.get(paso);
-    }
-    
-    Collections.reverse(camino);
-    return "Camino más corto: " + camino.toString() + " | Costo total: " + distancias.get(destiny);
-}
 
 }
     
