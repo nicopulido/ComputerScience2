@@ -25,6 +25,10 @@ public abstract class Graph<T,U> {
     public abstract void removeVertex(T value);
     public abstract IVertex<T,U> getVertex(T value);
 
+    public int vertexSize() {
+        return this.vertexs.size();
+    }
+
     public void listAdya() {
         for (IVertex<T,U> vertex : this.vertexs) {
             System.out.println(vertex + "-> { " + vertex.getNeighbours() + " }");

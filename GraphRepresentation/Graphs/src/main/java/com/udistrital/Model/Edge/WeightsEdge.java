@@ -16,7 +16,7 @@ public class WeightsEdge<T,U> implements Edge<T,U> {
 
     @Override
     public IVertex<T,U> get(IVertex<T,U> vertex) {
-        return vertex == to ?  from : to;
+        return vertex == to ? from : to;
     }
     @Override
     public IVertex<T,U>[] getVertexs() {
