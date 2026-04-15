@@ -1,18 +1,27 @@
 package com.udistrital;
 
 
+import javax.swing.SwingUtilities;
+import com.udistrital.View.GraphGUI;
+
+
 import com.udistrital.Model.Graph.*;
 import com.udistrital.Model.Algorithms.*;;
 
 public class App 
 {
     public static void main( String[] args )
+
     {   
         /*SimpleGraph<Character> grafo = new SimpleGraph<>();
         grafo.addVertex('A');
         grafo.addVertex('B');
         grafo.addEdge('A', 'B');
         grafo.listInci();*/
+       
+        //SwingUtilities.invokeLater(() -> new GraphGUI());
+        
+
 
         WeightsGraph<Character, Integer> grafo2 = new WeightsGraph<>(9999, 0);
         Dijkstra dijkstra = new Dijkstra();
