@@ -1,4 +1,4 @@
-package com.udistrital.Model.Algorithms;
+package com.udistrital.Model.Algorithms.Mininum_Path;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -25,6 +25,10 @@ public abstract class Graph<T,U> {
     public abstract void removeVertex(T value);
     public abstract IVertex<T,U> getVertex(T value);
 
+    public ArrayList<IVertex<T,U>> getVertexs() {
+        return this.vertexs;
+    }
+
     public int vertexSize() {
         return this.vertexs.size();
     }
