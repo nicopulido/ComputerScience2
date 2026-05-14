@@ -2,9 +2,9 @@ package com.udistrital.Controller;
 
 import java.util.ArrayList;
 
-import com.udistrital.Model.Edge;
-import com.udistrital.Model.Graph;
-import com.udistrital.Model.Vertex;
+import com.udistrital.Model.Edge.*;
+import com.udistrital.Model.Graph.*;
+import com.udistrital.Model.Vertex.*;
 
 public class GraphController {
     private Graph<String> graph;

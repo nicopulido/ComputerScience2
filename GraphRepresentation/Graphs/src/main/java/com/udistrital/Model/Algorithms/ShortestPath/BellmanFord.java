@@ -1,6 +1,6 @@
-package com.udistrital.Model.Algorithms;
+package com.udistrital.Model.Algorithms.ShortestPath;
 
-import com.udistrital.Model.Graph.WeightsGraph;
+import com.udistrital.Model.Graph.*;
 import com.udistrital.Model.Vertex.IVertex;
 import com.udistrital.Model.Edge.Edge;
 import java.util.HashMap;

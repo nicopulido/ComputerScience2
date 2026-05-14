@@ -3,6 +3,8 @@ package com.udistrital.Model.Graph;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.udistrital.Model.Edge.Edge;
 import com.udistrital.Model.Edge.WeightsEdge;
@@ -88,7 +90,18 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         }
         return matrix;
     }
-
+/*  TODO: improve matrixAdya implementation
+    public Map<IVertex<T,U>,IVertex<T,U>> matrixAdya() {
+        Map<IVertex<T,U>,IVertex<T,U>> matrix = new HashMap<>();
+        for (Edge<T,U> edge : this.edges) {
+            IVertex<T,U> vertex1 = edge.getVertexs()[0];
+            IVertex<T,U> vertex2 = edge.getVertexs()[0];
+            matrix[vertex1Index][vertex2Index] = edge.getValue();
+            matrix[vertex2Index][vertex1Index] = edge.getValue();
+        }
+        return matrix;
+    } 
+*/
     private static <U> U[][] createArray(int size, U defaultValue) 
     {
     @SuppressWarnings("unchecked")
