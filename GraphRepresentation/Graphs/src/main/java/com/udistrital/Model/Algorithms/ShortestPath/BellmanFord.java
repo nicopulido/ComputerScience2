@@ -1,4 +1,4 @@
-package com.udistrital.Model.Algorithms.Mininum_Path;
+package com.udistrital.Model.Algorithms.ShortestPath;
 
 import com.udistrital.Model.Graph.*;
 import com.udistrital.Model.Vertex.IVertex;

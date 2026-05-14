@@ -1,4 +1,4 @@
-package com.udistrital.Model.Algorithms.Mininum_Path;
+package com.udistrital.Model.Algorithms.ShortestPath;
 
 public class FloydWarshall {
     //TODO: convert into generic

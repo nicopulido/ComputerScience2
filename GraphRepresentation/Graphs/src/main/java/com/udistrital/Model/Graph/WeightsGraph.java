@@ -90,7 +90,7 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         }
         return matrix;
     }
-
+/*  TODO: improve matrixAdya implementation
     public Map<IVertex<T,U>,IVertex<T,U>> matrixAdya() {
         Map<IVertex<T,U>,IVertex<T,U>> matrix = new HashMap<>();
         for (Edge<T,U> edge : this.edges) {
@@ -101,7 +101,7 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         }
         return matrix;
     } 
-
+*/
     private static <U> U[][] createArray(int size, U defaultValue) 
     {
     @SuppressWarnings("unchecked")
