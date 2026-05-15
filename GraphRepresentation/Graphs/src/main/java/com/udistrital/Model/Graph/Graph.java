@@ -1,6 +1,8 @@
 package com.udistrital.Model.Graph;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import com.udistrital.Model.Edge.Edge;
 import com.udistrital.Model.Vertex.IVertex;
@@ -45,7 +47,7 @@ public abstract class Graph<T,U> {
         }
     }
 
-    public abstract U[][] matrixAdya();
+    public abstract Map<IVertex<T,U>,List<IVertex<T,U>>> matrixAdya();
 
     public int[][] matrixInci() {
         int[][] matrix = new int[this.vertexs.size()][this.edges.size()];

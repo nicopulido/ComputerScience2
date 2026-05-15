@@ -1,6 +1,9 @@
 package com.udistrital.Model.Graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.udistrital.Model.Edge.Edge;
 import com.udistrital.Model.Edge.SimpleEdge;
@@ -9,8 +12,11 @@ import com.udistrital.Model.Vertex.IVertex;
 
 public class SimpleGraph<T> extends Graph<T,Integer> {
 
+    private Map<IVertex<T,Integer>,List<IVertex<T,Integer>>> adyacencyMap;
+
     public SimpleGraph() {
         super();
+        this.adyacencyMap = new HashMap<>();
     }
 
 
@@ -21,7 +27,18 @@ public class SimpleGraph<T> extends Graph<T,Integer> {
         this.edges.add(edge);
         vertex1.addEdge(edge);
         vertex2.addEdge(edge);
+        adyacencyMap.get(vertex1).add(vertex2);
   
+    }
+
+    public Edge<T,Integer> getEdge(IVertex<T,Integer> vertex1, IVertex<T,Integer> vertex2) {
+        Edge<T,Integer> tarjet = null;
+        for (Edge<T,Integer> edge : vertex1.getEdges()) {
+            if(edge.get(vertex1).equals(vertex2)) {
+                tarjet = edge;
+            }  
+        }
+        return tarjet;
     }
 
     @Override
@@ -57,16 +74,29 @@ public class SimpleGraph<T> extends Graph<T,Integer> {
         return vertexs.get(vertexs.indexOf(new Vertex<>(value)));
     }
 
-    public Integer[][] matrixAdya() {
-        Integer[][] matrix = new Integer[this.vertexs.size()][this.vertexs.size()];
+    @Override
+    public Map<IVertex<T,Integer>,List<IVertex<T,Integer>>> matrixAdya() {
+        return this.adyacencyMap;
+    }
 
-        for (Edge<T,Integer> edge : this.edges) {
-            int vertex1Index = this.vertexs.indexOf(edge.getVertexs()[0]);
-            int vertex2Index = this.vertexs.indexOf(edge.getVertexs()[1]);
-            matrix[vertex1Index][vertex2Index] = 1;
-            matrix[vertex2Index][vertex1Index] = 1;
+        public void printAdya() {
+
+    List<IVertex<T,Integer>> vertices = new ArrayList<>(adyacencyMap.keySet());
+    for (IVertex<T,Integer> v : vertices) {
+        System.out.print("  " + v + "  "); 
+    }
+    System.out.println();
+    for (IVertex<T,Integer> v : vertices) {
+        System.out.print("  " + v + "  ");
+        for (IVertex<T,Integer> v2 : this.getVertexs()) {
+            if (v.equals(v2) || this.getEdge(v, v2) == null) {
+            System.out.print(0); 
+            } else {
+            System.out.print(1 + " ");
+            } 
         }
-        return matrix;
+        System.out.println();
+    }
     }
 
     @Override
