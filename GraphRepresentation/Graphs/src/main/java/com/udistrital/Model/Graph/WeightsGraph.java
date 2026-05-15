@@ -1,9 +1,11 @@
 package com.udistrital.Model.Graph;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.udistrital.Model.Edge.Edge;
@@ -15,11 +17,14 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
 
     private U infiniteValue;
     private U neutralValue;
+    private Map<IVertex<T,U>,List<IVertex<T,U>>> adyacencyMap;
 
     public WeightsGraph(U infinityValue, U neutral) {
         super();
         this.infiniteValue = infinityValue;
         this.neutralValue = neutral;
+        this.adyacencyMap = new HashMap<>();
+        
     }
 
     public U getNeutral() {
@@ -43,6 +48,8 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
             vertex2.addEdge(edge);
         }
         this.edges.add(edge);  
+        adyacencyMap.get(vertex1).add(vertex2);
+
     }
 
     @Override
@@ -60,10 +67,22 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         return this.edges;
     }
 
+    public Edge<T,U> getEdge(IVertex<T,U> vertex1, IVertex<T,U> vertex2) {
+        Edge<T,U> tarjet = null;
+        for (Edge<T,U> edge : vertex1.getEdges()) {
+            if(edge.get(vertex1).equals(vertex2)) {
+                tarjet = edge;
+            }
+            
+        }
+        return tarjet;
+    }
+
     @Override
     public void addVertex(T value) {
         Vertex<T,U> vertex = new Vertex<>(value);
         this.vertexs.add(vertex);
+        this.adyacencyMap.put(vertex, new LinkedList<>());
     }
 
     @Override
@@ -78,30 +97,29 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         return vertexs.get(vertexs.indexOf(new Vertex<>(value)));
     }
 
-    @Override
-    public U[][] matrixAdya() {
-        U[][] matrix = this.createArray(this.vertexs.size(), this.neutralValue);
 
-        for (Edge<T,U> edge : this.edges) {
-            int vertex1Index = this.vertexs.indexOf(edge.getVertexs()[0]);
-            int vertex2Index = this.vertexs.indexOf(edge.getVertexs()[1]);
-            matrix[vertex1Index][vertex2Index] = edge.getValue();
-            matrix[vertex2Index][vertex1Index] = edge.getValue();
-        }
-        return matrix;
+    public void printAdya() {
+
+    List<IVertex<T,U>> vertices = new ArrayList<>(adyacencyMap.keySet());
+    for (IVertex<T,U> v : vertices) {
+        System.out.print("  " + v + "  "); 
     }
-/*  TODO: improve matrixAdya implementation
-    public Map<IVertex<T,U>,IVertex<T,U>> matrixAdya() {
-        Map<IVertex<T,U>,IVertex<T,U>> matrix = new HashMap<>();
-        for (Edge<T,U> edge : this.edges) {
-            IVertex<T,U> vertex1 = edge.getVertexs()[0];
-            IVertex<T,U> vertex2 = edge.getVertexs()[0];
-            matrix[vertex1Index][vertex2Index] = edge.getValue();
-            matrix[vertex2Index][vertex1Index] = edge.getValue();
+    System.out.println();
+    for (IVertex<T,U> v : vertices) {
+        System.out.print("  " + v + "  ");
+        for (IVertex<T,U> v2 : this.getVertexs()) {
+            if (v.equals(v2) || this.getEdge(v, v2) == null) {
+            System.out.print(this.neutralValue + " "); 
+            } else {
+            System.out.print(this.getEdge(v, v2).getValue() + " ");
+            } 
         }
-        return matrix;
-    } 
-*/
+        System.out.println();
+    }
+    }
+
+    /* Este bloque de codigo ya no sirve para nada pero me costo mucho hacerlo asi que no quiero borrarlo :3
+
     private static <U> U[][] createArray(int size, U defaultValue) 
     {
     @SuppressWarnings("unchecked")
@@ -110,6 +128,12 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         Arrays.fill(row, defaultValue);
     }
     return array;
+    }
+    */
+
+    @Override
+    public Map<IVertex<T,U>,List<IVertex<T,U>>> matrixAdya() {
+        return this.adyacencyMap;
     }
     
     
