@@ -103,5 +103,19 @@ public class SimpleGraph<T> extends Graph<T,Integer> {
     public void addEdge(T vertexValue1, T vertexValue2, Integer edgeValue) {
         throw new UnsupportedOperationException("Simple graph do not support weight edges");
     }
+
+
+    @Override
+    public Integer getValueAdya(IVertex<T, Integer> vertex1, IVertex<T, Integer> vertex2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getValueAdya'");
+    }
+
+
+    @Override
+    public void setValueAdya(IVertex<T, Integer> vertex1, IVertex<T, Integer> vertex2, Integer value) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setValueAdya'");
+    }
     
 }

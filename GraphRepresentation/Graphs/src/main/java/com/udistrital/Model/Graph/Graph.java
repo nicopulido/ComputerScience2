@@ -23,9 +23,12 @@ public abstract class Graph<T,U> {
     public abstract void addEdge(T vertexValue1, T vertexValue2, U edgeValue);
     public abstract void removeEdge(T vertexValue1, T vertexValue2);
     public abstract ArrayList<Edge<T,U>> getEdges(T vertex);
+    public abstract Edge<T,U> getEdge(IVertex<T,U> vertex1, IVertex<T,U> vertex2);
     public abstract void addVertex(T value);
     public abstract void removeVertex(T value);
     public abstract IVertex<T,U> getVertex(T value);
+    public abstract U getValueAdya(IVertex<T,U> vertex1 , IVertex<T,U> vertex2);
+    public abstract void setValueAdya(IVertex<T,U> vertex1 , IVertex<T,U> vertex2, U value);
 
     public ArrayList<IVertex<T,U>> getVertexs() {
         return this.vertexs;
