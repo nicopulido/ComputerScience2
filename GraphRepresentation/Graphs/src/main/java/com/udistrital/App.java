@@ -1,14 +1,12 @@
 package com.udistrital;
+
 import com.udistrital.Model.Algorithms.FirstSearch.Depth;
 import com.udistrital.Model.Algorithms.MaximumFlow.EdmondsKarp;
 import com.udistrital.Model.Algorithms.MaximumFlow.FordFulkerson;
 import com.udistrital.Model.Graph.*;
 
-public class App 
-{
-    public static void main( String[] args )
-
-    {   
+public class App {
+    public static void main(String[] args) {
 
     WeightsGraph<Character, Integer> grafo2 = new WeightsGraph<>(9999, 0);
     grafo2.addVertex('S');
@@ -35,6 +33,7 @@ public class App
     System.out.println(fordFulkerson.maxFlow('S', 'T'));
     System.out.println(edmondsKarp.maxFlow('S', 'T'));
     }
-
 }
+
+
     
