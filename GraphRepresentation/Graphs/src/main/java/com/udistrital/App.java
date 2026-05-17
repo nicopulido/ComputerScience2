@@ -1,7 +1,7 @@
 package com.udistrital;
 import com.udistrital.Model.Algorithms.FirstSearch.Depth;
 import com.udistrital.Model.Algorithms.MaximumFlow.EdmondsKarp;
-import com.udistrital.Model.Algorithms.MaximumFlow.MaximumFlow;
+import com.udistrital.Model.Algorithms.MaximumFlow.FordFulkerson;
 import com.udistrital.Model.Graph.*;
 
 public class App 
@@ -30,8 +30,8 @@ public class App
 
     grafo2.printAdya();
     
-    MaximumFlow<Character, Integer> fordFulkerson = new MaximumFlow<>(grafo2, new Depth<>());
-    MaximumFlow<Character, Integer> edmondsKarp = new EdmondsKarp<>(grafo2);
+    FordFulkerson<Character, Integer> fordFulkerson = new FordFulkerson<>(grafo2, new Depth<>());
+    FordFulkerson<Character, Integer> edmondsKarp = new EdmondsKarp<>(grafo2);
     System.out.println(fordFulkerson.maxFlow('S', 'T'));
     System.out.println(edmondsKarp.maxFlow('S', 'T'));
     }

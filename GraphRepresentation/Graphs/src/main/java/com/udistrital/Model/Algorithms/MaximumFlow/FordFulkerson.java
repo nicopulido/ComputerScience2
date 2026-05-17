@@ -7,12 +7,12 @@ import com.udistrital.Model.Algorithms.FirstSearch.FirstSearch;
 import com.udistrital.Model.Graph.Graph;
 import com.udistrital.Model.Vertex.IVertex;
 
-public class MaximumFlow<T, U extends Number & Comparable<U>>  {
+public class FordFulkerson<T, U extends Number & Comparable<U>>  {
 
     private Graph<T,U> graph;
     private FirstSearch<T,U> fs;
 
-    public MaximumFlow(Graph<T,U> graph, FirstSearch<T,U> fs) {
+    public FordFulkerson(Graph<T,U> graph, FirstSearch<T,U> fs) {
         this.graph = graph;
         this.fs = fs;
     }
