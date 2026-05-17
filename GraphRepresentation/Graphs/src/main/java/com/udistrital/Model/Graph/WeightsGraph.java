@@ -66,7 +66,7 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
     public ArrayList<Edge<T,U>> getEdges(T value) {
         return this.edges;
     }
-
+    @Override
     public Edge<T,U> getEdge(IVertex<T,U> vertex1, IVertex<T,U> vertex2) {
         Edge<T,U> tarjet = null;
         for (Edge<T,U> edge : vertex1.getEdges()) {
@@ -97,6 +97,31 @@ public class WeightsGraph<T,U> extends Graph<T,U> {
         return vertexs.get(vertexs.indexOf(new Vertex<>(value)));
     }
 
+    @Override
+    public U getValueAdya(IVertex<T,U> vertex1 , IVertex<T,U> vertex2){
+
+        List<IVertex<T,U>> adyaLinkedList = this.adyacencyMap.get(vertex1);
+        if (adyaLinkedList == null) return this.neutralValue;
+        for (IVertex<T,U> vertex : adyaLinkedList) {
+
+            if(vertex2.equals(vertex)) {
+                return this.getEdge(vertex1, vertex).getValue();
+            } 
+        }
+        return this.neutralValue;
+    }
+
+    @Override
+    public void setValueAdya(IVertex<T,U> vertex1 , IVertex<T,U> vertex2, U value){
+
+        List<IVertex<T,U>> adyaLinkedList = this.adyacencyMap.get(vertex1);
+        for (IVertex<T,U> vertex : adyaLinkedList) {
+
+            if(vertex2.equals(vertex)) {
+                this.getEdge(vertex1, vertex).setValue(value);
+            } 
+        }
+    }
 
     public void printAdya() {
 
